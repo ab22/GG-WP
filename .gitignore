@@ -1,5 +1,6 @@
 # Ignore all logs in folder
 logs/*.log
+logs/*.log.*
 
-# Ignore .pyc files
+# Ignore python bytecode files
 *.pyc
