@@ -1,6 +1,6 @@
 import handlers
 
 
-routes = [
+ROUTES = [
     (r'/', handlers.MainHandler)
 ]

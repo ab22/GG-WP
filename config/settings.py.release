@@ -1,9 +1,17 @@
 import logging
 
 
-PORT = 8000
+APP_PORT = 8080
 
-LOG_SETTINGS = {
+CONNECTIONS = {
+    'mongodb': {
+        'host': '127.0.0.1',
+        'port': 27017,
+        'database': 'yryl_dev'
+    }
+}
+
+LOGGER_SETTINGS = {
     'level': logging.DEBUG,
     'format': '[%(levelname)s][%(asctime)s]: %(message)s',
     'datefmt': '%H:%M:%S %d:%m:%Y',
