@@ -1,3 +1,3 @@
 import config.settings
 
-from .routes import ROUTES
+from config.routes import ROUTES

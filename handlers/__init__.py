@@ -1,1 +1,2 @@
-from .main_handler import MainHandler
+from handlers.main_handler import MainHandler
+from handlers.summoner_handler import SummonerHandler

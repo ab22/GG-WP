@@ -2,6 +2,7 @@ import tornado.ioloop
 import config
 import logging
 import motor
+import services
 
 
 def configure_logger(**kwargs):
@@ -14,24 +15,30 @@ def configure_mongodb(connection):
     port = connection['port']
     db = connection['database']
     client = motor.MotorClient(host, port)
-
     return (client, client[db])
 
 
 def main():
-    # Get the configuration parameters
-    connections = config.settings.CONNECTIONS
-    app_port = config.settings.APP_PORT
-    logger_settings = config.settings.LOGGER_SETTINGS
+    # Get config parameters
+    settings = config.settings
+    debug = settings.DEBUG
+    views_path = settings.VIEWS_PATH
+    databases = settings.DATABASES
+    app_port = settings.APP_PORT
+    logger_settings = settings.LOGGER_SETTINGS
+    riot_api_key = settings.RIOT_API_KEY
     routes = config.ROUTES
 
     log = configure_logger(**logger_settings)
-    client, db = configure_mongodb(connections['mongodb'])
+    client, db = configure_mongodb(databases['mongodb'])
+    services.initialize(db, riot_api_key)
 
     application = tornado.web.Application(
         routes,
         db=db,
-        log=log
+        log=log,
+        debug=debug,
+        template_path=views_path
     )
     log.info('Starting server...')
     application.listen(app_port)

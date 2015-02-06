@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>You Rage You Lose</title>
+    </head>
+    <body>
+        <h1>You Rage You Lose</h1>
+        {% if error_msg %}
+            <b>{{ error_msg }}</b>
+        {% else %}
+            <div>
+                <h2> Match Info </h2>
+                <p>
+                    <b>Game Id:</b>  {{ game['gameId'] }}
+                </p>
+                <p>
+                    <b>Game Length:</b> {{ game['gameLength']}}
+                </p>
+                <p>
+                    <b>Game Mode:</b> {{ game['gameMode'] }}
+                </p>
+                <p>
+                    <b>Game Type:</b> {{ game['gameType'] }}
+                </p>
+                <p>
+                    <b>Map Id:</b> {{ game['mapId'] }}
+                </p>
+                <p>
+                    <b>Game Start Time:</b> {{ game['gameStartTime'] }}
+                </p>
+                <p>
+                    <b>Platform:</b> {{ game['platformId'] }}
+                </p>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>Summoner</th>
+                        <th>Champion</th>
+                        <th>Team</th>
+                        <th>Spell 1</th>
+                        <th>Spell 2</th>
+                    </tr>
+                    {% for player in game['participants'] %}
+                        <tr>
+                            <td> {{ player['summonerName'] }} </td>
+                            <td> {{ player['championId'] }} </td>
+                            <td> {{ player['teamId'] }} </td>
+                            <td> {{ player['spell1Id'] }} </td>
+                            <td> {{ player['spell2Id'] }} </td>
+                        </tr>
+                    {% end %}
+                </table>
+            </div>
+        {% end %}
+    </body>
+</html>

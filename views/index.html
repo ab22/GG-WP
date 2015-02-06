@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>You Rage You Lose</title>
+        <script type="text/javascript">
+            var rewriteUrl = function (e){
+                if(e.preventDefault) e.preventDefault();
+                var summoner_name = document.getElementById('summoner_name').value;
+                var region_dd = document.getElementById('region');
+                var region = region_dd.options[region_dd.selectedIndex].value;
+                if(summoner_name){
+                    window.location = '/summoner/' + region + '/' + summoner_name;
+                }
+            };
+
+            window.onload = function(){
+                var form = document.getElementById('query_form');
+                if(form.attachEvent){
+                    form.attachEvent("submit", rewriteUrl);
+                }else{
+                    form.addEventListener("submit", rewriteUrl);
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <h1>{{ title }}</h1>
+        <form id="query_form" action="/" method="GET">
+            <input id="summoner_name" type="text" name="summoner">
+            <select id="region">
+                <option value="na" selected>NA</option>
+                <option value="lan">LAN</option>
+            </select>
+            <input type="submit" value="Search">
+        </form>
+    </body>
+</html>

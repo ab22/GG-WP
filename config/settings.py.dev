@@ -1,9 +1,19 @@
 import logging
+import os
 
 
+# Get the path above this file (base path).
+BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+VIEWS_PATH = os.path.join(BASE_PATH, 'views')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 APP_PORT = 8080
 
-CONNECTIONS = {
+# SECURITY WARNING: don't commit the key to the public repos
+RIOT_API_KEY = '<API KEY HERE>'
+
+DATABASES = {
     'mongodb': {
         'host': '127.0.0.1',
         'port': 27017,
