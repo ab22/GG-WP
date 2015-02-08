@@ -75,7 +75,6 @@ class Match():
             if summoner_id == int(participant['summonerId']):
                 team_id = participant['teamId']
                 enemy_team_id = 100 if team_id == 200 else 200
-                print(team_id, enemy_team_id)
                 break
 
         players = yield Match.get_players_by_team_id(
