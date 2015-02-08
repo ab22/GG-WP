@@ -4,6 +4,7 @@ import json
 
 from utils import api_urls, request_handler
 from tornado import gen
+from tornado.escape import url_escape
 
 
 class Summoner():
@@ -21,7 +22,8 @@ class Summoner():
             with the region that we send, so we must add it.
         """
         region = region.lower()
-        url = api_urls.summoners_by_names(summoner_name, region)
+        html_summoner_name = url_escape(summoner_name)
+        url = api_urls.summoners_by_names(html_summoner_name, region)
         client = tornado.httpclient.AsyncHTTPClient()
         summoner = None
         try:
