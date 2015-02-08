@@ -3,7 +3,7 @@ from tornado import gen
 from services import Region, Summoner, Match
 
 
-class SummonerHandler(tornado.web.RequestHandler):
+class MatchHandler(tornado.web.RequestHandler):
 
     @gen.coroutine
     def get(self, region, summoner_name):

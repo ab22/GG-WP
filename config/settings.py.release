@@ -7,7 +7,7 @@ BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 VIEWS_PATH = os.path.join(BASE_PATH, 'views')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 APP_PORT = 8080
 
 # SECURITY WARNING: don't commit the key to the public repos

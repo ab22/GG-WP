@@ -31,8 +31,22 @@ def request_all_champs():
 
 
 @tornado.gen.coroutine
-def save_all_champs(db):
-    print('Requesting all champions static data...')
+def request_all_summoners():
+    url = api_urls.all_summoners()
+    client = tornado.httpclient.HTTPClient()
+    try:
+        response = client.fetch(url)
+    except tornado.httpclient.HTTPError as e:
+        print("Error:", e)
+        client.close()
+        return None
+    data = json.loads(response.body.decode('ascii'))
+    return data['data']
+
+
+@tornado.gen.coroutine
+def migrate_champs(db):
+    print('Requesting all champions...')
     champs = yield request_all_champs()
     if champs:
         print('Removing all champions...')
@@ -44,9 +58,26 @@ def save_all_champs(db):
 
 
 @tornado.gen.coroutine
+def migrate_summoners(db):
+    print('Requesting all summoners...')
+    summoners = yield request_all_summoners()
+    if summoners:
+        print('Removing all summoners...')
+        yield db.summoner_spells.remove()
+        print('Inserting new summoners')
+        for key, summoner in summoners.items():
+            yield db.summoner_spells.insert(summoner)
+        print('Summoners database was updated successfully!')
+
+
+@tornado.gen.coroutine
 def main(args):
+    all_options = [
+        'champions',
+        'summoner_spells'
+    ]
     usage = 'Usage: {} [-r|--request|--request-all] ' \
-          '<champions>\r\n'.format(args[0])
+            '<champions|summoner_spells>\r\n'.format(args[0])
     if len(args) <= 1:
         print(usage)
         IOLoop.instance().stop()
@@ -57,7 +88,7 @@ def main(args):
         # Remove -r|--request option from args
         args = args[1:]
     elif args[0] == '--request-all':
-        args = ['champions']
+        args = all_options
     else:
         print(usage)
         IOLoop.instance().stop()
@@ -70,7 +101,9 @@ def main(args):
     client, db = configure_mongodb(databases['mongodb'])
 
     if 'champions' in args:
-        yield save_all_champs(db)
+        yield migrate_champs(db)
+    if 'summoner_spells' in args:
+        yield migrate_summoners(db)
     IOLoop.instance().stop()
 
 

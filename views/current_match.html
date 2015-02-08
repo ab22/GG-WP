@@ -20,36 +20,72 @@
                     <b>Game Mode:</b> {{ game['gameMode'] }}
                 </p>
                 <p>
-                    <b>Game Type:</b> {{ game['gameType'] }}
-                </p>
-                <p>
                     <b>Map Id:</b> {{ game['mapId'] }}
-                </p>
-                <p>
-                    <b>Game Start Time:</b> {{ game['gameStartTime'] }}
                 </p>
                 <p>
                     <b>Platform:</b> {{ game['platformId'] }}
                 </p>
             </div>
             <div>
+                <h3>Your team</h3>
                 <table>
                     <tr>
+                        <th></th>
+                        <th>Spell 1</th>
+                        <th>Spell 2</th>
                         <th>Summoner</th>
                         <th>Champion</th>
                         <th>Team</th>
-                        <th>Spell 1</th>
-                        <th>Spell 2</th>
                     </tr>
-                    {% for player in game['participants'] %}
+                    {% for player in game['team']['players'] %}
                         <tr>
+                            <td> <img width="40px" height="40px" src="/static/champions/{{ player['championImageName']}}.png" /> </td>
+                            <td> <img width="40px" height="40px" src="/static/summoners/{{ player['spell1Name'] }}.png" /> </td>
+                            <td> <img width="40px" height="40px" src="/static/summoners/{{ player['spell2Name'] }}.png" /> </td>
                             <td> {{ player['summonerName'] }} </td>
-                            <td> {{ player['championId'] }} </td>
-                            <td> {{ player['teamId'] }} </td>
-                            <td> {{ player['spell1Id'] }} </td>
-                            <td> {{ player['spell2Id'] }} </td>
+                            <td> {{ player['championName'] }} </td>
+                            <td> {{ game['team']['teamId'] }} </td>
                         </tr>
                     {% end %}
+                    <tr style="background-color:#CCC; width: 100%">
+                        <td colspan="6">
+                            <b><span>Banned Champions:</span></b>
+                            {% for ban in game['team']['bannedChampions'] %}
+                                <img width="40px" height="40px" src="/static/champions/{{ ban['championImageName'] }}.png" />
+                                {% end %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h3>Enemy team</h3>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Spell 1</th>
+                        <th>Spell 2</th>
+                        <th>Summoner</th>
+                        <th>Champion</th>
+                        <th>Team</th>
+                    </tr>
+                    {% for player in game['enemyTeam']['players'] %}
+                        <tr>
+                            <td> <img width="40px" height="40px" src="/static/champions/{{ player['championImageName'] }}.png" /> </td>
+                            <td> <img width="40px" height="40px" src="/static/summoners/{{ player['spell1Name'] }}.png" /> </td>
+                            <td> <img width="40px" height="40px" src="/static/summoners/{{ player['spell2Name'] }}.png" /> </td>
+                            <td> {{ player['summonerName'] }} </td>
+                            <td> {{ player['championName'] }} </td>
+                            <td> {{ game['team']['teamId'] }} </td>
+                        </tr>
+                    {% end %}
+                    <tr style="background-color:#CCC">
+                        <td colspan="6">
+                        <b><span>Banned Champions:</span></b>
+                        {% for ban in game['enemyTeam']['bannedChampions'] %}
+                            <img width="40px" height="40px" src="/static/champions/{{ ban['championImageName'] }}.png" />
+                        {% end %}
+                        </td>
+                    </tr>
                 </table>
             </div>
         {% end %}
