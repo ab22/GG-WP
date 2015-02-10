@@ -12,6 +12,5 @@ class MainHandler(tornado.web.RequestHandler):
         regions_json = {str(x): str(x).upper() for x in supported_regions}
         self.render(
             'index.html',
-            title='You Rage You Lose',
             supported_regions=regions_json
         )

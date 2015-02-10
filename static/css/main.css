@@ -1,4 +1,17 @@
 body {
-    padding-top: 13%;
     padding-bottom: 20px;
+}
+
+.dark-bg{
+    background-color: #222222 !important;
+}
+
+.navbar{
+    background-color: #205081;
+    border-bottom-color: ##2E3D54;
+    margin-bottom: 0px;
+}
+
+.navbar-brand{
+    color: white !important;
 }

@@ -11,6 +11,7 @@
         <script src="static/js/angular.min.js"></script>
         <!-- Bootstrap core CSS -->
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/darkly-bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="/static/css/main.css" rel="stylesheet">
@@ -22,39 +23,42 @@
         <![endif]-->
     </head>
     <body ng-controller="IndexCtrl" ng-cloak>
-        <div ng-init="regions={{ supported_regions }}" />
+        <div ng-init="regions={{ supported_regions }}" >
+        </div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
-              <a class="navbar-brand" href="#">{{ title }}</a>
+                <a class="navbar-brand" href="/">
+                    <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                    You Rage You Lose
+                </a>
             </div>
           </div>
         </nav>
-
+        <div class="jumbotron dark-bg"></div>
         <div class="jumbotron">
-          <div class="container">
-            <h3>Search Summoner</h3>
-            <p></p>
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input id="summoner_name" type="text" name="summoner" class="form-control" placeholder="Search for..." ng-model="summonerName">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ng-cloak>
-                              [[selectedRegion]]
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#" ng-repeat="(key, val) in regions" ng-click="changeRegion(key)">[[val]]</a>
-                                </li>
-                            </ul>
-                            <button type="submit" class="btn btn-default btn-primary" ng-click="search()">Search</button>
-                        </span>
+            <div class="container">
+                <h3>Search Summoner</h3>
+                <p></p>
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="summoner_name" type="text" name="summoner" class="form-control" placeholder="Search for..." ng-model="summonerName">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ng-cloak>
+                                  [[selectedRegion]]
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#" ng-repeat="(key, val) in regions" ng-click="changeRegion(key)">[[val]]</a>
+                                    </li>
+                                </ul>
+                                <button type="submit" class="btn btn-default btn-primary" ng-click="search()">Search</button>
+                            </span>
+                        </div>
                     </div>
-                </div>
             </div>
-          </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

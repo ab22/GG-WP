@@ -11,6 +11,29 @@ class Summoner():
 
     @staticmethod
     @gen.coroutine
+    def request_leagues_for_summoners(summoners, region):
+        """
+            Request league information for all of the summoners.
+        """
+        region = region.lower()
+        summoners_ids = ','.join(
+            [str(x) for x in summoners]
+        )
+        url = api_urls.summoners_leagues(summoners_ids, region)
+        client = tornado.httpclient.AsyncHTTPClient()
+        leagues = None
+        try:
+            response = yield client.fetch(url)
+        except tornado.httpclient.HTTPError as ex:
+            code = ex.code
+            request_handler.log_invalid_request(code, url)
+            return (code, leagues)
+        code = response.code
+        leagues = json.loads(response.body.decode('utf-8'))
+        return (code, leagues)
+
+    @staticmethod
+    @gen.coroutine
     def request_by_name(summoner_name, region):
         """
             Performs a request to the Riot API to attempt and find the
@@ -34,7 +57,7 @@ class Summoner():
             return (code, summoner)
         code = response.code
         db = services.db
-        data = json.loads(response.body.decode('ascii'))
+        data = json.loads(response.body.decode('utf-8'))
         summoner = data[summoner_name.lower()]
         summoner['name'] = summoner['name'].lower()
         summoner['region'] = region
