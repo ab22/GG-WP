@@ -30,7 +30,7 @@ class Summoner():
             return (code, leagues)
         code = response.code
         leagues = json.loads(response.body.decode('utf-8'))
-        return (code, leagues)
+        return code, leagues
 
     @staticmethod
     @gen.coroutine
@@ -54,7 +54,7 @@ class Summoner():
         except tornado.httpclient.HTTPError as ex:
             code = ex.code
             request_handler.log_invalid_request(code, url)
-            return (code, summoner)
+            return code, summoner
         code = response.code
         db = services.db
         data = json.loads(response.body.decode('utf-8'))
@@ -62,7 +62,7 @@ class Summoner():
         summoner['name'] = summoner['name'].lower()
         summoner['region'] = region
         db.summoners.save(summoner)
-        return (code, summoner)
+        return code, summoner
 
     @staticmethod
     @gen.coroutine
@@ -78,5 +78,5 @@ class Summoner():
                 summoner_name,
                 region
             )
-            return (code, summoner)
-        return (200, summoner)
+            return code, summoner
+        return 200, summoner

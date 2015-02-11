@@ -127,7 +127,7 @@ class Match():
                 team_id = player['teamId']
                 enemy_team_id = 100 if team_id == 200 else 200
                 break
-        return (team_id, enemy_team_id)
+        return team_id, enemy_team_id
 
     @staticmethod
     @gen.coroutine
@@ -187,10 +187,10 @@ class Match():
         except tornado.httpclient.HTTPError as ex:
             code = ex.code
             request_handler.log_invalid_request(code, url)
-            return (code, game)
+            return code, game
         code = response.code
         game = json.loads(response.body.decode('utf-8'))
-        return (code, game)
+        return code, game
 
     @staticmethod
     @gen.coroutine
@@ -213,7 +213,7 @@ class Match():
             region
         )
         if game is None:
-            return (code, game)
+            return code, game
         summoners_ids = []
         for player in game['participants']:
             summoners_ids.append(player['summonerId'])
@@ -227,4 +227,4 @@ class Match():
             summoner_id,
             leagues
         )
-        return (code, game)
+        return code, game
