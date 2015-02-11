@@ -32,6 +32,7 @@
         </nav>
         {% if error_msg %}
             <div class="jumbotron">
+                <div class="container">
                     <div class="alert alert-danger" role="alert">
                         <h3>
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -39,6 +40,7 @@
                         </h3>
                         <span>{{ error_msg }}</span>
                     </div>
+                </div>
             </div>
         {% else %}
             <div class="jumbotron">
