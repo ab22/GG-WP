@@ -2,7 +2,7 @@ import logging
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # SECURITY WARNING: don't commit the key to the public repos
 RIOT_API_KEY = os.environ['RIOT_API_KEY']
