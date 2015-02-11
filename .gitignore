@@ -7,3 +7,7 @@ config/settings.py
 
 # Ignore python bytecode files
 *.pyc
+
+# Ignore heroku config files
+Procfile
+runtime.txt
