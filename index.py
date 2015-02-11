@@ -12,15 +12,23 @@ def configure_logger(**kwargs):
 
 
 def configure_mongodb(connection):
-    host = connection['host']
-    port = connection['port']
+    host = connection.get('host', None)
+    port = connection.get('port', None)
     db = connection['database']
-    client = motor.MotorClient(host, port)
+    if port:
+        client = motor.MotorClient(host, port)
+    else:
+        client = motor.MotorClient(host)
     return (client, client[db])
 
 
-def configure_redis():
-    redis = tornadoredis.Client()
+def configure_redis(connection):
+    host = connection.get('host', None)
+    port = connection.get('port', None)
+    if port:
+        redis = tornadoredis.Client(host, port)
+    else:
+        redis = tornadoredis.Client(host)
     redis.connect()
     return redis
 
@@ -39,7 +47,7 @@ def main():
 
     log = configure_logger(**logger_settings)
     client, db = configure_mongodb(databases['mongodb'])
-    cachedb = configure_redis()
+    cachedb = configure_redis(databases['redis'])
 
     services.initialize(db, riot_api_key, cachedb)
     log.info('Loading champions to cache...')
