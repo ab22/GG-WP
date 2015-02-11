@@ -22,12 +22,5 @@ DATABASES = {
 LOGGER_SETTINGS = {
     'level': logging.WARN,
     'format': '[%(levelname)s][%(asctime)s]: %(message)s',
-    'datefmt': '%H:%M:%S %d:%m:%Y',
-    'handlers': [
-        RotatingFileHandler(
-            'logs/app.log',
-            maxBytes=5*1024*1024,
-            backupCount=5
-        )
-    ]
+    'datefmt': '%H:%M:%S %d:%m:%Y'
 }
