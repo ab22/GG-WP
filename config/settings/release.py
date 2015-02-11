@@ -1,13 +1,12 @@
 import logging
 import os
 
-from logging.handlers import RotatingFileHandler
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
 # SECURITY WARNING: don't commit the key to the public repos
 RIOT_API_KEY = os.environ['RIOT_API_KEY']
+APP_PORT = int(os.environ['APP_PORT'])
 
 DATABASES = {
     'mongodb': {

@@ -12,5 +12,3 @@ except ImportError as e:
 BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 VIEWS_PATH = os.path.join(BASE_PATH, 'views')
 STATIC_PATH = os.path.join(BASE_PATH, 'static')
-
-APP_PORT = 8080
