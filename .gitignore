@@ -3,7 +3,7 @@ logs/*.log
 logs/*.log.*
 
 # Ignore the settings file. It should be unique per environment
-config/settings.py
+config/settings/dev.py
 
 # Ignore python bytecode files
 *.pyc

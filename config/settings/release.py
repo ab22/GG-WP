@@ -3,23 +3,17 @@ import os
 
 from logging.handlers import RotatingFileHandler
 
-# Get the path above this file (base path).
-BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-VIEWS_PATH = os.path.join(BASE_PATH, 'views')
-STATIC_PATH = os.path.join(BASE_PATH, 'static')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-APP_PORT = 8080
+DEBUG = os.environ.get('DEBUG', False)
 
 # SECURITY WARNING: don't commit the key to the public repos
-RIOT_API_KEY = '<API KEY HERE>'
+RIOT_API_KEY = os.environ['RIOT_API_KEY']
 
 DATABASES = {
     'mongodb': {
-        'host': '127.0.0.1',
-        'port': 27017,
-        'database': 'yryl_dev'
+        'host': os.environ['MONGODB_HOST'],
+        'port': os.environ['MONGODB_PORT'],
+        'database': os.environ['MONGODB_DB']
     }
 }
 
