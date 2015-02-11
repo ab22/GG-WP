@@ -227,6 +227,4 @@ class Match():
             summoner_id,
             leagues
         )
-        print('Game: ', game)
-        print('-'*20)
         return (code, game)
