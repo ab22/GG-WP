@@ -18,6 +18,8 @@ def configure_mongodb(connection):
     if port:
         client = motor.MotorClient(host, port)
     else:
+        print('No port specified..')
+        print('Sending host as ', host)
         client = motor.MotorClient(host)
     return (client, client[db])
 
