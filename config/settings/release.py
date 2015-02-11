@@ -15,7 +15,9 @@ DATABASES = {
         'database': os.environ['MONGODB_DB']
     },
     'redis': {
-        'host': os.environ['REDIS_HOST']
+        'host': os.environ['REDIS_HOST'],
+        'port': os.environ['REDIS_PORT'],
+        'password': os.environ['REDIS_PASSWORD']
     }
 }
 

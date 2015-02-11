@@ -25,10 +25,11 @@ def configure_mongodb(connection):
 def configure_redis(connection):
     host = connection.get('host', None)
     port = connection.get('port', None)
+    pw = connection.get('password', None)
     if port:
-        redis = tornadoredis.Client(host, port)
+        redis = tornadoredis.Client(host, port, password=pw)
     else:
-        redis = tornadoredis.Client(host)
+        redis = tornadoredis.Client(host, password=pw)
     redis.connect()
     return redis
 
