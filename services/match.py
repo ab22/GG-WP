@@ -43,7 +43,7 @@ class Match():
         player_league['isVeteran'] = league_data['isVeteran']
         player_league['isHotStreak'] = league_data['isHotStreak']
         player_league['leaguePoints'] = league_data['leaguePoints']
-        player_league['winRate'] = '{0:.2f}'.format(win_ratio)
+        player_league['winRate'] = '{0:.2f}%'.format(win_ratio)
         player_league['tier'] = league['tier']
 
     @staticmethod
