@@ -1,6 +1,7 @@
 import logging
 import os
 
+from logging.handlers import RotatingFileHandler
 
 # Get the path above this file (base path).
 BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -27,7 +28,7 @@ LOGGER_SETTINGS = {
     'format': '[%(levelname)s][%(asctime)s]: %(message)s',
     'datefmt': '%H:%M:%S %d:%m:%Y',
     'handlers': [
-        logging.handlers.RotatingFileHandler(
+        RotatingFileHandler(
             'logs/app.log',
             maxBytes=5*1024*1024,
             backupCount=5
