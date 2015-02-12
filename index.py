@@ -39,14 +39,11 @@ def configure_redis(connection):
 def main():
     # Get config parameters
     settings = config.settings
-    debug = settings.DEBUG
-    views_path = settings.VIEWS_PATH
-    static_path = settings.STATIC_PATH
+
     databases = settings.DATABASES
     app_port = settings.APP_PORT
     logger_settings = settings.LOGGER_SETTINGS
     riot_api_key = settings.RIOT_API_KEY
-    routes = config.ROUTES
 
     log = configure_logger(**logger_settings)
     client, db = configure_mongodb(databases['mongodb'])
@@ -58,14 +55,16 @@ def main():
     log.info('Loading summoner spells to cache...')
     services.SummonerSpell.cache_all()
 
-    application = tornado.web.Application(
-        routes,
-        db=db,
-        log=log,
-        debug=debug,
-        template_path=views_path,
-        static_path=static_path
-    )
+    params = {
+        'handlers': config.ROUTES,
+        'debug': settings.DEBUG,
+        'template_path': settings.VIEWS_PATH,
+        'static_path': settings.STATIC_PATH,
+        'db': db,
+        'log': log
+    }
+    application = tornado.web.Application(**params)
+
     log.info('Starting server...')
     application.listen(app_port)
     log.info('Server started on port {}'.format(app_port))
