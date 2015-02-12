@@ -32,7 +32,6 @@ def all_summoners():
 
 def summoners_leagues(summoners, region):
     api_key = settings.RIOT_API_KEY
-    # https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/20253493?api_key=9db27042-8593-47c3-9019-7b6b9dcc0404
     url = 'https://{0}.api.pvp.net/api/lol/{0}/v2.5/league/by-summoner/' \
           '{1}?api_key={2}'
     return url.format(region, summoners, api_key)
