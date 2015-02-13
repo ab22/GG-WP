@@ -45,12 +45,7 @@ def main():
     log = configure_logger(**logger_settings)
     client, db = configure_mongodb(databases['mongodb'])
     cachedb = configure_redis(databases['redis'])
-
     services.initialize(db, cachedb)
-    #log.info('Loading champions to cache...')
-    #services.Champion.cache_all()
-    #log.info('Loading summoner spells to cache...')
-    #services.SummonerSpell.cache_all()
 
     params = {
         'handlers': config.ROUTES,
