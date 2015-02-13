@@ -14,7 +14,8 @@ def generate_salt():
 
 @gen.coroutine
 def encrypt(data):
-    data = data
+    if type(data) == str:
+        data = data.encode('utf-8')
     salt = generate_salt()
     hashed_data = yield pool.submit(bcrypt.hashpw, data, salt)
     return hashed_data
@@ -22,6 +23,8 @@ def encrypt(data):
 
 @gen.coroutine
 def compare(hashed_data, data):
+    if type(data) == str:
+        data = data.encode('utf-8')
     data = data
     result = yield pool.submit(bcrypt.hashpw, data, hashed_data)
     return result == hashed_data

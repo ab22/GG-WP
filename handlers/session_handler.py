@@ -27,8 +27,6 @@ class LoginHandler(BaseHandler):
         if username is None or password is None:
             self.render('login.html')
             return
-
-        password = password.encode('utf-8')
         user = yield self.find_user_by_username(username)
         if user is None:
             self.render('login.html')
