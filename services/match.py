@@ -35,6 +35,8 @@ class Match():
             if entry['playerOrTeamName'] == summoner_name:
                 league_data = entry
                 break
+        if league_data is None:
+            return
         win_ratio = league_data['wins']
         win_ratio /= league_data['wins'] + league_data['losses']
         player_league['division'] = league_data['division']
