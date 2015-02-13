@@ -41,17 +41,16 @@ def main():
     databases = settings.DATABASES
     app_port = settings.APP_PORT
     logger_settings = settings.LOGGER_SETTINGS
-    riot_api_key = settings.RIOT_API_KEY
 
     log = configure_logger(**logger_settings)
     client, db = configure_mongodb(databases['mongodb'])
     cachedb = configure_redis(databases['redis'])
 
-    services.initialize(db, riot_api_key, cachedb)
-    log.info('Loading champions to cache...')
-    services.Champion.cache_all()
-    log.info('Loading summoner spells to cache...')
-    services.SummonerSpell.cache_all()
+    services.initialize(db, cachedb)
+    #log.info('Loading champions to cache...')
+    #services.Champion.cache_all()
+    #log.info('Loading summoner spells to cache...')
+    #services.SummonerSpell.cache_all()
 
     params = {
         'handlers': config.ROUTES,
@@ -59,7 +58,9 @@ def main():
         'template_path': settings.VIEWS_PATH,
         'static_path': settings.STATIC_PATH,
         'db': db,
-        'log': log
+        'log': log,
+        'cookie_secret': settings.SECRET_KEY,
+        'login_url': settings.LOGIN_URL
     }
     application = tornado.web.Application(**params)
 

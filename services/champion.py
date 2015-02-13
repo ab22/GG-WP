@@ -1,10 +1,36 @@
 import services
+import tornado.httpclient
+import utils.api_urls as api_urls
+import utils.request_handler as request_handler
+import json
 
 from tornado import gen
 
 
 class Champion():
     cache_key = 'champ'
+
+    @staticmethod
+    @tornado.gen.coroutine
+    def request_all():
+        url = api_urls.all_champions()
+        client = tornado.httpclient.HTTPClient()
+        try:
+            response = client.fetch(url)
+        except tornado.httpclient.HTTPError as ex:
+            code = ex.code
+            request_handler.log_invalid_request(code, url)
+            return code, None
+        data = json.loads(response.body.decode('utf-8'))
+        return 200, data['data']
+
+    @staticmethod
+    @tornado.gen.coroutine
+    def migrate(champs):
+        db = services.db
+        yield db.champions.remove()
+        for key, champ in champs.items():
+            yield db.champions.insert(champ)
 
     @staticmethod
     @gen.coroutine

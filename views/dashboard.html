@@ -22,8 +22,6 @@
         <![endif]-->
     </head>
     <body ng-controller="IndexCtrl" ng-cloak>
-        <div ng-init="regions={{ supported_regions }}" >
-        </div>
         <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
@@ -35,29 +33,23 @@
           </div>
         </nav>
         <div class="row"></div>
-        <div class="jumbotron">
-            <div class="container">
-                <h3>Search Summoner</h3>
-                <p></p>
-                <form>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input id="summoner_name" type="text" name="summoner" class="form-control" placeholder="Search for..." ng-model="summonerName">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ng-cloak>
-                                  [[selectedRegion]]
-                                  <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="#" ng-repeat="(key, val) in regions" ng-click="changeRegion(key)">[[val]]</a>
-                                    </li>
-                                </ul>
-                                <button type="submit" class="btn btn-default btn-primary" ng-click="search()">Search</button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
+        <div class="container">
+            <div class="jumbotron">
+                <h3>Dashboard</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <form action="/dashboard" method="POST">
+                        <input type="hidden" name="action" value="champions" />
+                        <button type="submit" class="btn btn-default btn-primary">Update Champions</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <form action="/dashboard" method="POST">
+                        <input type="hidden" name="action" value="summoner_spells" />
+                        <button type="submit" class="btn btn-default btn-primary">Update Summoner Spells</button>
+                    </form>
+                </div>
             </div>
         </div>
 

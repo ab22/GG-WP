@@ -1,9 +1,37 @@
 import services
+import tornado.httpclient
+import utils.api_urls as api_urls
+import utils.request_handler as request_handler
+import json
+
 from tornado import gen
 
 
 class SummonerSpell():
     cache_key = 'summ_spell'
+
+    @staticmethod
+    @tornado.gen.coroutine
+    def request_all():
+        url = api_urls.all_summoners()
+        client = tornado.httpclient.HTTPClient()
+        try:
+            response = client.fetch(url)
+        except tornado.httpclient.HTTPError as ex:
+            code = ex.code
+            request_handler.log_invalid_request(code, url)
+            return code, None
+        code = response.code
+        data = json.loads(response.body.decode('utf-8'))
+        return code, data['data']
+
+    @staticmethod
+    @tornado.gen.coroutine
+    def migrate(summoners):
+        db = services.db
+        yield db.summoner_spells.remove()
+        for key, summoner in summoners.items():
+            yield db.summoner_spells.insert(summoner)
 
     @staticmethod
     @gen.coroutine
