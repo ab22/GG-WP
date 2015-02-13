@@ -8,6 +8,8 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 RIOT_API_KEY = os.environ['RIOT_API_KEY']
 APP_PORT = int(os.environ['PORT'])
 
+SECRET_KEY = os.environ['SECRET_KEY']
+
 DATABASES = {
     'mongodb': {
         'host': os.environ['MONGODB_HOST'],
