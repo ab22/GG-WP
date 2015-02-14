@@ -46,7 +46,7 @@ class Match():
         player_league['isHotStreak'] = league_data['isHotStreak']
         player_league['leaguePoints'] = league_data['leaguePoints']
         player_league['winRate'] = '{0:.2f}%'.format(win_ratio)
-        player_league['tier'] = league['tier']
+        player_league['tier'] = league['tier'].title()
 
     @staticmethod
     def match_players_leagues(players, leagues):
@@ -90,7 +90,7 @@ class Match():
                     'spell2Name': spell_name_2,
                     'league': {
                         'division': '',
-                        'tier': 'UNRANKED',
+                        'tier': 'Unranked',
                         'wins': 0,
                         'losses': 0,
                         'isVeteran': False,

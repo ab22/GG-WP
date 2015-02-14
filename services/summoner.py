@@ -45,7 +45,7 @@ class Summoner():
             with the region that we send, so we must add it.
         """
         region = region.lower()
-        html_summoner_name = url_escape(summoner_name)
+        html_summoner_name = url_escape(summoner_name, plus=False)
         url = api_urls.summoners_by_names(html_summoner_name, region)
         client = tornado.httpclient.AsyncHTTPClient()
         summoner = None
@@ -58,7 +58,7 @@ class Summoner():
         code = response.code
         db = services.db
         data = json.loads(response.body.decode('utf-8'))
-        summoner = data[summoner_name.lower()]
+        summoner = data[summoner_name.lower().replace(' ', '')]
         summoner['name'] = summoner['name'].lower()
         summoner['region'] = region
         db.summoners.save(summoner)
