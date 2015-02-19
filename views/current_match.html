@@ -77,86 +77,59 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <h3>Your Team</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 20%"></th>
-                                <th style="width: 20%">Summoner</th>
-                                <th style="width: 20%">Division</th>
-                                <th style="width: 20%">LeaguePoints</th>
-                                <th style="width: 20%">W/L (Win Ratio)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for player in game['team']['players'] %}
+                {% for team in game['teams'] %}
+                    <div class="row">
+                        <h3>{{ team['title'] }}</h3>
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <div class="center-block" style="float: left; width: 47px; height: 30px;">
-                                            <img width="30px" height="28px" src="/static/champions/{{ player['championImageName']}}.png" />
-                                        </div>
-                                        <div class="center-block" style="float: left; ">
-                                            <div class="row" style="display: flex; align-items: center">
-                                                <img width="13px" height="13px" src="/static/summoners/{{ player['spell1Name'] }}.png" />
-                                            </div>
-                                            <div class="row" style="display: flex; align-items: center; padding-top: 2px">
-                                                <img width="13px" height="13px" src="/static/summoners/{{ player['spell2Name'] }}.png" />
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td> {{ player['summonerName'] }} </td>
-                                    <td> {{ player['league']['tier'] + ' ' + player['league']['division']}} </td>
-                                    <td> {{ player['league']['leaguePoints'] }} </td>
-                                    <td>
-                                        {{ player['league']['wins'] }}/{{ player['league']['losses'] }}
-                                        <b>({{player['league']['winRate']}})</b>
-                                    </td>
+                                    <th style="width: 20%"></th>
+                                    <th style="width: 20%">Summoner</th>
+                                    <th style="width: 20%">Division (LP)</th>
+                                    <th style="width: 20%">Series</th>
+                                    <th style="width: 20%">W/L (Win Ratio)</th>
                                 </tr>
-                            {% end %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <h3>Enemy Team</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 20%"></th>
-                                <th style="width: 20%">Summoner</th>
-                                <th style="width: 20%">Division</th>
-                                <th style="width: 20%">LeaguePoints</th>
-                                <th style="width: 20%">W/L (Win Ratio)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for player in game['enemyTeam']['players'] %}
-                                <tr>
-                                    <td>
-                                        <div class="center-block" style="float: left; width: 47px; height: 30px;">
-                                            <img width="30px" height="28px" src="/static/champions/{{ player['championImageName']}}.png" />
-                                        </div>
-                                        <div class="center-block" style="float: left; ">
-                                            <div class="row" style="display: flex; align-items: center">
-                                                <img width="13px" height="13px" src="/static/summoners/{{ player['spell1Name'] }}.png" />
+                            </thead>
+                            <tbody>
+                                {% for player in team['players'] %}
+                                    <tr>
+                                        <td>
+                                            <div class="center-block" style="float: left; width: 47px; height: 30px;">
+                                                <img width="30px" height="28px" src="/static/champions/{{ player['championImageName']}}.png" />
                                             </div>
-                                            <div class="row" style="display: flex; align-items: center; padding-top: 2px">
-                                                <img width="13px" height="13px" src="/static/summoners/{{ player['spell2Name'] }}.png" />
+                                            <div class="center-block" style="float: left; ">
+                                                <div class="row" style="display: flex; align-items: center">
+                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spell1Name'] }}.png" />
+                                                </div>
+                                                <div class="row" style="display: flex; align-items: center; padding-top: 2px">
+                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spell2Name'] }}.png" />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td> {{ player['summonerName'] }} </td>
-                                    <td> {{ player['league']['tier'] + ' ' + player['league']['division']}}  </td>
-                                    <td> {{ player['league']['leaguePoints'] }} </td>
-                                    <td>
-                                        {{ player['league']['wins'] }}/{{ player['league']['losses'] }}
-                                        <b>({{player['league']['winRate']}})</b>
-                                    </td>
-                                </tr>
-                            {% end %}
-                        </tbody>
-                    </table>
-                </div>
+                                        </td>
+                                        <td>
+                                            {{ player['summonerName'] }}
+                                        </td>
+                                        <td>
+                                            {{ player['league']['tier'] + ' ' + player['league']['division']}}
+                                            <b>({{ player['league']['leaguePoints'] }})</b>
+                                        </td>
+                                        <td>
+                                            {% if player['league'].get('series') %}
+                                                {{ player['league']['series'] }}
+                                            {% else %}
+                                                No series
+                                            {% end %}
+                                        </td>
+                                        <td>
+                                            {{ player['league']['wins'] }}/{{ player['league']['losses'] }}
+                                            <b>({{player['league']['winRate']}})</b>
+                                        </td>
+                                    </tr>
+                                {% end %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% end %}
         {% end %}
     </body>
 </html>

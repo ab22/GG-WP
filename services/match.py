@@ -47,6 +47,9 @@ class Match():
         player_league['leaguePoints'] = league_data['leaguePoints']
         player_league['winRate'] = '{0:.2f}%'.format(win_ratio)
         player_league['tier'] = league['tier'].title()
+        series = league_data.get('miniSeries', None)
+        if series:
+            player_league['series'] = series['progress']
 
     @staticmethod
     def match_players_leagues(players, leagues):
@@ -155,16 +158,20 @@ class Match():
             'mapId': game['mapId'],
             'gameId': game['gameId'],
             'platformId': game['platformId'],
-            'team': {
-                'teamId': team_id,
-                'players': teammates,
-                'bannedChampions': team_bans
-            },
-            'enemyTeam': {
-                'teamId': enemy_team_id,
-                'players': enemies,
-                'bannedChampions': enemy_bans
-            }
+            'teams': [
+                {
+                    'title': 'Your Team',
+                    'teamId': team_id,
+                    'players': teammates,
+                    'bannedChampions': team_bans
+                },
+                {
+                    'title': 'Enemy Team',
+                    'teamId': enemy_team_id,
+                    'players': enemies,
+                    'bannedChampions': enemy_bans
+                },
+            ]
         }
         return game
 
