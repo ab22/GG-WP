@@ -124,6 +124,7 @@ class Match():
                 team_bans.append(team_ban)
         return team_bans
 
+    @staticmethod
     def get_team_ids(players, summoner_id):
         team_id = 0
         enemy_team_id = 0
