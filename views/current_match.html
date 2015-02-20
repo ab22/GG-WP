@@ -83,16 +83,21 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%">Summoner</th>
+                                    <th style="width: 5%"></th>
+                                    <th style="width: 15%">Summoner</th>
                                     <th style="width: 20%">Division (LP)</th>
-                                    <th style="width: 20%">Series</th>
                                     <th style="width: 20%">W/L (Win Ratio)</th>
+                                    <th style="width: 20%">Runes</th>
+                                    <th style="width: 20%">Masteries</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for player in team['players'] %}
+                                    {% if game['requester_id'] == player['summonerId'] %}
+                                    <tr style="background-color: #FFFACD">
+                                    {% else %}
                                     <tr>
+                                    {% end %}
                                         <td>
                                             <div class="center-block" style="float: left; width: 47px; height: 30px;">
                                                 <img width="30px" height="28px" src="/static/champions/{{ player['championImageName']}}.png" />
@@ -110,19 +115,33 @@
                                             {{ player['summonerName'] }}
                                         </td>
                                         <td>
-                                            {{ player['league']['tier'] + ' ' + player['league']['division']}}
-                                            <b>({{ player['league']['leaguePoints'] }})</b>
-                                        </td>
-                                        <td>
-                                            {% if player['league'].get('series') %}
-                                                {{ player['league']['series'] }}
-                                            {% else %}
-                                                No series
-                                            {% end %}
+                                            <div class="row">
+                                                {{ player['league']['tier'] + ' ' + player['league']['division']}}
+                                                <b>({{ player['league']['leaguePoints'] }})</b>
+                                            </div>
+                                            <div class="row">
+                                                {% if player['league'].get('series') %}
+                                                    {% for x in player['league']['series'] %}
+                                                        {% if x == 'W' %}
+                                                            <span style="color: green" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                        {% elif x == 'L' %}
+                                                            <span style="color: red" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        {% else %}
+                                                            <span style="color: gray" class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                                        {% end %}
+                                                    {% end %}
+                                                {% end %}
+                                            </div>
                                         </td>
                                         <td>
                                             {{ player['league']['wins'] }}/{{ player['league']['losses'] }}
                                             <b>({{player['league']['winRate']}})</b>
+                                        </td>
+                                        <td>
+                                            Runes
+                                        </td>
+                                        <td>
+                                            Masteries
                                         </td>
                                     </tr>
                                 {% end %}

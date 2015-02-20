@@ -147,6 +147,7 @@ class Match():
         if leagues:
             Match.match_players_leagues(teammates + enemies, leagues)
         game = {
+            'requester_id': summoner_id,
             'gameLength': game['gameLength'],
             'gameMode': game['gameMode'],
             'mapId': game['mapId'],
