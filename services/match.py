@@ -8,13 +8,6 @@ from services.summoner_spell import SummonerSpell
 from services.summoner import Summoner
 
 
-def get_test_game():
-    with open('match_data.json') as match_file:
-        match = match_file.read()
-    game = json.loads(match)
-    return game
-
-
 class Match():
 
     invalid_characters = (' ', '.', '\'')
