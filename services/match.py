@@ -32,6 +32,7 @@ class Match():
             return
         win_ratio = league_data['wins']
         win_ratio /= league_data['wins'] + league_data['losses']
+        win_ratio *= 100
         player_league['division'] = league_data['division']
         player_league['wins'] = league_data['wins']
         player_league['losses'] = league_data['losses']
