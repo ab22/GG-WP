@@ -13,7 +13,7 @@ class Match():
     invalid_characters = (' ', '.', '\'')
 
     @staticmethod
-    def filter_leagues_for_player(leagues, player_id, summoner_name):
+    def filter_leagues_for_player(leagues, player_id):
         for key, league in leagues.items():
             if int(key) == player_id:
                 return league
@@ -30,9 +30,9 @@ class Match():
                 break
         if league_data is None:
             return
-        win_ratio = league_data['wins']
-        win_ratio /= league_data['wins'] + league_data['losses']
-        win_ratio *= 100
+        total_games = league_data['wins'] + league_data['losses']
+        wins = league_data['wins']
+        win_ratio = (wins / total_games) * 100
         player_league['division'] = league_data['division']
         player_league['wins'] = league_data['wins']
         player_league['losses'] = league_data['losses']
@@ -49,11 +49,9 @@ class Match():
     def match_players_leagues(players, leagues):
         for player in players:
             player_id = player['summonerId']
-            summoner_name = player['summonerName']
             league = Match.filter_leagues_for_player(
                 leagues,
-                player_id,
-                summoner_name
+                player_id
             )
             if league is None:
                 continue
@@ -209,7 +207,7 @@ class Match():
                 - Store the game data in a cache db.
                 - Since all player ids are returned in the current game data,
                   then all players must be related to that data in the cache
-                  db aswell.
+                  db as well.
         """
         region = region.lower()
         code, game = yield Match.request_by_summoner_id(
