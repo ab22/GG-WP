@@ -19,7 +19,7 @@ def configure_mongodb(connection):
         client = motor.MotorClient(host, port)
     else:
         client = motor.MotorClient(host)
-    return (client, client[db])
+    return client, client[db]
 
 
 def configure_redis(connection):

@@ -40,7 +40,7 @@ class Match():
         player_league['isHotStreak'] = league_data['isHotStreak']
         player_league['leaguePoints'] = league_data['leaguePoints']
         player_league['winRate'] = '{0:.2f}%'.format(win_ratio)
-        player_league['tier'] = league['tier'].title()
+        player_league['tier'] = league['tier'].lower()
         series = league_data.get('miniSeries', None)
         if series:
             player_league['series'] = series['progress']
@@ -217,10 +217,11 @@ class Match():
         )
         if game is None:
             return code, game
-        summoners_ids = []
-        for player in game['participants']:
-            summoners_ids.append(player['summonerId'])
 
+        summoners_ids = [
+            player['summonerId']
+            for player in game['participants']
+        ]
         code, leagues = yield Summoner.request_leagues_for_summoners(
             summoners_ids,
             region

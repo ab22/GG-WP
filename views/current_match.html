@@ -100,7 +100,7 @@
                                     {% end %}
                                         <td>
                                             <div class="center-block" style="float: left; width: 47px; height: 30px;">
-                                                <img width="30px" height="28px" src="/static/champions/{{ player['championImageName']}}.png" />
+                                                <img width="30px" height="28px" src="/static/champions/{{ player['championImageName'] }}.png" />
                                             </div>
                                             <div class="center-block" style="float: left; ">
                                                 <div class="row" style="display: flex; align-items: center">
@@ -116,8 +116,8 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                {{ player['league']['tier'] + ' ' + player['league']['division']}}
-                                                <b>({{ player['league']['leaguePoints'] }})</b>
+                                                <img width="34px" height="34px" src="/static/rank_badges/{{ player['league']['tier'] }}.png" alt="{{ player['league']['tier'] + ' ' + player['league']['division'] }}" />
+                                                <b>{{ player['league']['tier'].title() + ' ' + player['league']['division'] }} ({{ player['league']['leaguePoints'] }})</b>
                                             </div>
                                             <div class="row">
                                                 {% if player['league'].get('series') %}
