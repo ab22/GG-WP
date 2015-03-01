@@ -49,8 +49,8 @@
                                   <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="#" ng-repeat="(key, val) in regions" ng-click="changeRegion(key)">[[val]]</a>
+                                    <li ng-repeat="(key, val) in regions">
+                                        <a href="#" ng-click="changeRegion(key)">[[val]]</a>
                                     </li>
                                 </ul>
                                 <button type="submit" class="btn btn-default btn-primary" ng-click="search()">Search</button>
@@ -63,7 +63,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="static/js/bootstrap.min.js"></script>
-        <script src="static/js/index.js"></script>
+        <script src="static/js/controllers/index.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="static/js/ie10-viewport-bug-workaround.js"></script>
     </body>

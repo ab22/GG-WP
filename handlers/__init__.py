@@ -2,3 +2,5 @@ from handlers.main_handler import MainHandler
 from handlers.match_handler import MatchHandler
 from handlers.session_handler import LoginHandler
 from handlers.dashboard_handler import DashboardHandler
+from handlers.dashboard_handler import ChampionHandler
+from handlers.dashboard_handler import SummonerSpellHandler

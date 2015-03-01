@@ -10,8 +10,6 @@ from services.summoner import Summoner
 
 class Match():
 
-    invalid_characters = (' ', '.', '\'')
-
     @staticmethod
     def filter_leagues_for_player(leagues, player_id):
         for key, league in leagues.items():
@@ -73,9 +71,7 @@ class Match():
                 spell_name_2 = yield SummonerSpell.find_cached_by_id(
                     spell_id_2
                 )
-                champ_img_name = champion_name
-                for invalid_char in Match.invalid_characters:
-                    champ_img_name = champ_img_name.replace(invalid_char, '')
+                champ_img_name = Champion.image_name(champion_name)
                 team_player = {
                     'summonerId': player['summonerId'],
                     'summonerName': player['summonerName'],
@@ -105,9 +101,7 @@ class Match():
             if ban['teamId'] == team_id:
                 champion_id = ban['championId']
                 champion_name = yield Champion.find_cached_by_id(champion_id)
-                champ_img_name = champion_name
-                for invalid_char in Match.invalid_characters:
-                    champ_img_name = champ_img_name.replace(invalid_char, '')
+                champ_img_name = Champion.image_name(champion_name)
                 team_ban = {
                     'championName': champion_name,
                     'championImageName': champ_img_name,

@@ -52,3 +52,16 @@ class SummonerSpell():
         key = '{}:{}'.format(SummonerSpell.cache_key, spell_id)
         champ = yield gen.Task(cachedb.get, key)
         return champ
+
+    @staticmethod
+    @gen.coroutine
+    def get_all():
+        db = services.db
+        spells = yield db.summoner_spells.find().to_list(length=None)
+        return spells
+
+    @staticmethod
+    def image_name(summoner_spell_name):
+        cleaned_name = summoner_spell_name.replace(' ', '')
+        return cleaned_name.title()
+

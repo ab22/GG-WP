@@ -9,6 +9,7 @@ from tornado import gen
 
 class Champion():
     cache_key = 'champ'
+    invalid_characters = (' ', '.', '\'')
 
     @staticmethod
     @tornado.gen.coroutine
@@ -51,3 +52,23 @@ class Champion():
         key = '{}:{}'.format(Champion.cache_key, champion_id)
         champ = yield gen.Task(cachedb.get, key)
         return champ
+
+    @staticmethod
+    @gen.coroutine
+    def get_all():
+        db = services.db
+        champions = yield db.champions.find().to_list(length=None)
+        return champions
+
+    @staticmethod
+    def image_name(champion_name):
+        """
+            Replaces invalid characters from the champion name.
+
+            For example:
+                Cho'Gath gets translated to Chogath.
+        """
+        cleaned_name = champion_name
+        for invalid_char in Champion.invalid_characters:
+            cleaned_name = cleaned_name.replace(invalid_char, '')
+        return cleaned_name.title()

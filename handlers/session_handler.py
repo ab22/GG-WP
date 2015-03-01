@@ -1,11 +1,11 @@
 import utils.async_bcrypt as async_bcrypt
 
 from tornado import gen
-from .base_handler import BaseHandler
+from .base_handlers import AuthHandler
 from config.settings import SESSION_COOKIE_NAME
 
 
-class LoginHandler(BaseHandler):
+class LoginHandler(AuthHandler):
 
     def set_session_cookies(self, data):
         self.set_secure_cookie(SESSION_COOKIE_NAME, data)
