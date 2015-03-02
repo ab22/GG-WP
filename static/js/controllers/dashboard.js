@@ -25,10 +25,6 @@ app.controller('DashboardCtrl', ['$scope', '$http', function($scope, $http){
         return option == $scope.selectedOption ? 'active' : '';
     };
 
-    $scope.changeMenuOption = function(option){
-        $scope.selectedOption = option;
-    };
-
     $scope.getChampions = function(){
         $scope.loadingChampions = true;
         $http.get('/champions').success(function(champions){
