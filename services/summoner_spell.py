@@ -63,5 +63,5 @@ class SummonerSpell():
     @staticmethod
     def image_name(summoner_spell_name):
         cleaned_name = summoner_spell_name.replace(' ', '')
-        return cleaned_name.title()
+        return cleaned_name
 

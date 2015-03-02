@@ -71,4 +71,4 @@ class Champion():
         cleaned_name = champion_name
         for invalid_char in Champion.invalid_characters:
             cleaned_name = cleaned_name.replace(invalid_char, '')
-        return cleaned_name.title()
+        return cleaned_name
