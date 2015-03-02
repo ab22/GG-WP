@@ -9,6 +9,7 @@ from tornado import gen
 
 class SummonerSpell():
     cache_key = 'summ_spell'
+    invalid_characters = (' ', '!')
 
     @staticmethod
     @tornado.gen.coroutine
@@ -62,6 +63,8 @@ class SummonerSpell():
 
     @staticmethod
     def image_name(summoner_spell_name):
-        cleaned_name = summoner_spell_name.replace(' ', '')
+        cleaned_name = summoner_spell_name
+        for invalid_char in SummonerSpell.invalid_characters:
+            cleaned_name = cleaned_name.replace(invalid_char, '')
         return cleaned_name
 
