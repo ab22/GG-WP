@@ -9,7 +9,6 @@ from tornado import gen
 
 class SummonerSpell():
     cache_key = 'summ_spell'
-    invalid_characters = (' ', '!')
 
     @staticmethod
     @tornado.gen.coroutine
@@ -63,8 +62,15 @@ class SummonerSpell():
 
     @staticmethod
     def image_name(summoner_spell_name):
+        """
+            Replaces invalid characters from the champion name.
+
+            For example:
+                'To The King!' gets translated to SummonerToTheKing
+        """
+        invalid_characters = (' ', '!')
         cleaned_name = summoner_spell_name
-        for invalid_char in SummonerSpell.invalid_characters:
+        for invalid_char in invalid_characters:
             cleaned_name = cleaned_name.replace(invalid_char, '')
         return 'Summoner{}'.format(cleaned_name)
 

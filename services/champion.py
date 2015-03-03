@@ -9,7 +9,6 @@ from tornado import gen
 
 class Champion():
     cache_key = 'champ'
-    invalid_characters = (' ', '.', '\'')
 
     @staticmethod
     @tornado.gen.coroutine
@@ -66,9 +65,10 @@ class Champion():
             Replaces invalid characters from the champion name.
 
             For example:
-                Cho'Gath gets translated to Chogath.
+                Cho'Gath gets translated to ChoGath.
         """
+        invalid_characters = (' ', '.', '\'')
         cleaned_name = champion_name
-        for invalid_char in Champion.invalid_characters:
+        for invalid_char in invalid_characters:
             cleaned_name = cleaned_name.replace(invalid_char, '')
         return cleaned_name
