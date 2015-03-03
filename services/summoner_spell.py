@@ -66,5 +66,5 @@ class SummonerSpell():
         cleaned_name = summoner_spell_name
         for invalid_char in SummonerSpell.invalid_characters:
             cleaned_name = cleaned_name.replace(invalid_char, '')
-        return cleaned_name
+        return 'Summoner{}'.format(cleaned_name)
 
