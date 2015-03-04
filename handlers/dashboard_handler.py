@@ -38,9 +38,9 @@ class DashboardHandler(AuthHandler):
             return
 
         if action == 'champions':
-            self.update_champions()
+            yield self.update_champions()
         elif action == 'summoner_spells':
-            self.update_summoner_spells()
+            yield self.update_summoner_spells()
         self.render(template)
 
 
