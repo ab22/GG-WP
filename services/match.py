@@ -72,6 +72,8 @@ class Match():
                     spell_id_2
                 )
                 champ_img_name = Champion.image_name(champion_name)
+                spell_image_name_1 = SummonerSpell.image_name(spell_name_1)
+                spell_image_name_2 = SummonerSpell.image_name(spell_name_2)
                 team_player = {
                     'summonerId': player['summonerId'],
                     'summonerName': player['summonerName'],
@@ -79,6 +81,8 @@ class Match():
                     'championImageName': champ_img_name,
                     'spell1Name': spell_name_1,
                     'spell2Name': spell_name_2,
+                    'spellImageName1': spell_image_name_1,
+                    'spellImageName2': spell_image_name_2,
                     'league': {
                         'division': '',
                         'tier': 'Unranked',

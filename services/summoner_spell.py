@@ -39,10 +39,10 @@ class SummonerSpell():
         db = services.db
         cachedb = services.cachedb
         pipe = cachedb.pipeline()
-        spells = db.summoner_spells.find()
-        for spell in (yield spells.to_list(length=None)):
+        spells = yield db.summoner_spells.find().to_list(length=None)
+        for spell in spells:
             key = '{}:{}'.format(SummonerSpell.cache_key, spell['id'])
-            pipe.set(key, spell['key'])
+            pipe.set(key, spell['name'])
         yield gen.Task(pipe.execute)
 
     @staticmethod
@@ -50,8 +50,8 @@ class SummonerSpell():
     def find_cached_by_id(spell_id):
         cachedb = services.cachedb
         key = '{}:{}'.format(SummonerSpell.cache_key, spell_id)
-        champ = yield gen.Task(cachedb.get, key)
-        return champ
+        spell = yield gen.Task(cachedb.get, key)
+        return spell
 
     @staticmethod
     @gen.coroutine

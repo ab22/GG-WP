@@ -38,8 +38,8 @@ class Champion():
         db = services.db
         cachedb = services.cachedb
         pipe = cachedb.pipeline()
-        champions = db.champions.find()
-        for champ in (yield champions.to_list(length=None)):
+        champions = yield db.champions.find().to_list(length=None)
+        for champ in champions:
             key = '{}:{}'.format(Champion.cache_key, champ['id'])
             pipe.set(key, champ['name'])
         yield gen.Task(pipe.execute)

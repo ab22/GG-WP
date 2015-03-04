@@ -1,6 +1,7 @@
 import tornado.web
+
 from tornado import gen
-from services import Region, Summoner, Match, Champion, SummonerSpell
+from services import Region, Summoner, Match
 
 
 class MatchHandler(tornado.web.RequestHandler):

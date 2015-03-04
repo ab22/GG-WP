@@ -12,24 +12,20 @@ def configure_logger(**kwargs):
 
 
 def configure_mongodb(connection):
+    default_port = 27017
     host = connection.get('host', None)
-    port = connection.get('port', None)
+    port = connection.get('port', default_port)
     db = connection['database']
-    if port:
-        client = motor.MotorClient(host, port)
-    else:
-        client = motor.MotorClient(host)
+    client = motor.MotorClient(host, port)
     return client, client[db]
 
 
 def configure_redis(connection):
+    default_port = 6379
     host = connection.get('host', None)
-    port = connection.get('port', None)
+    port = connection.get('port', default_port)
     pw = connection.get('password', None)
-    if port:
-        redis = tornadoredis.Client(host, port, password=pw)
-    else:
-        redis = tornadoredis.Client(host, password=pw)
+    redis = tornadoredis.Client(host, port, password=pw)
     redis.connect()
     return redis
 
