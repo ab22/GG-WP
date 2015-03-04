@@ -7,7 +7,6 @@ from services import Champion, SummonerSpell
 
 
 class DashboardHandler(AuthHandler):
-
     @gen.coroutine
     def update_champions(self):
         code, champs = yield Champion.request_all()
@@ -46,7 +45,6 @@ class DashboardHandler(AuthHandler):
 
 
 class ChampionHandler(AuthHandler, JsonHandler):
-
     @authenticated
     @gen.coroutine
     def get(self):
@@ -65,7 +63,6 @@ class ChampionHandler(AuthHandler, JsonHandler):
 
 
 class SummonerSpellHandler(AuthHandler, JsonHandler):
-
     @authenticated
     @gen.coroutine
     def get(self):

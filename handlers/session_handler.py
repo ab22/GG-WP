@@ -6,7 +6,6 @@ from config.settings import SESSION_COOKIE_NAME
 
 
 class LoginHandler(AuthHandler):
-
     def set_session_cookies(self, data):
         self.set_secure_cookie(SESSION_COOKIE_NAME, data)
 

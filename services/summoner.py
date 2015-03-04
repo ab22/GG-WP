@@ -8,7 +8,6 @@ from tornado.escape import url_escape
 
 
 class Summoner():
-
     @staticmethod
     @gen.coroutine
     def request_leagues_for_summoners(summoners, region):

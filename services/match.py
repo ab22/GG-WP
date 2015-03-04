@@ -9,7 +9,6 @@ from services.summoner import Summoner
 
 
 class Match():
-
     @staticmethod
     def filter_leagues_for_player(leagues, player_id):
         for key, league in leagues.items():

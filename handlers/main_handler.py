@@ -5,7 +5,6 @@ from services import Region
 
 
 class MainHandler(tornado.web.RequestHandler):
-
     @gen.coroutine
     def get(self):
         supported_regions = Region.supported_regions

@@ -5,7 +5,6 @@ from services import Region, Summoner, Match
 
 
 class MatchHandler(tornado.web.RequestHandler):
-
     @gen.coroutine
     def get(self, region, summoner_name):
         invalid_region = not Region.is_region_valid(region)
