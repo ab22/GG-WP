@@ -43,39 +43,6 @@
                 </div>
             </div>
         {% else %}
-            <div class="jumbotron">
-                <div class="container">
-                    <h3>Match Information</h3>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <b>Game Id:</b>
-                        </div>
-                        <div class="col-sm-3">
-                            {{ game['gameId'] }}
-                        </div>
-                        <div class="col-sm-3">
-                            <b>Game Length:</b>
-                        </div>
-                        <div class="col-sm-3">
-                            {{ game['gameLength'] }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <b>Game Mode:</b>
-                        </div>
-                        <div class="col-sm-3">
-                            <span class="label label-success">{{ game['gameMode'] }}</span>
-                        </div>
-                        <div class="col-sm-3">
-                            <b>Map Id:</b>
-                        </div>
-                        <div class="col-sm-3">
-                            <span class="label label-primary">{{ game['mapId'] }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="container">
                 {% for team in game['teams'] %}
                     <div class="row">
