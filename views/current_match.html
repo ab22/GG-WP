@@ -44,7 +44,14 @@
             <div class="container">
                 {% for team in game['teams'] %}
                     <div class="row">
-                        <h3>{{ team['title'] }}</h3>
+                        <h3>
+                            {{ team['title'] }}
+                            {% if team['teamId'] == 100 %}
+                                <span class="badge" style="background-color: blue">Blue Team</span>
+                            {% else %}
+                                <span class="badge" style="background-color: purple">Purple Team</span>
+                            {% end %}
+                        </h3>
                         <table class="table table-striped">
                             <thead class="table-header">
                                 <tr>
