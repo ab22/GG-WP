@@ -24,3 +24,7 @@ body {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.push-top{
+    padding-top: 50px;
+}

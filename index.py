@@ -12,10 +12,8 @@ def configure_logger(**kwargs):
 def main():
     # Get config parameters
     settings = config.settings
-
     app_port = settings.APP_PORT
     logger_settings = settings.LOGGER_SETTINGS
-
     log = configure_logger(**logger_settings)
     services.initialize()
 

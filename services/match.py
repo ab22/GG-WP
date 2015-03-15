@@ -27,12 +27,13 @@ class Match():
                 break
         if league_data is None:
             return
-        total_games = league_data['wins'] + league_data['losses']
         wins = league_data['wins']
+        losses = league_data['losses']
+        total_games = wins + losses
         win_ratio = (wins / total_games) * 100
         player_league['division'] = league_data['division']
-        player_league['wins'] = league_data['wins']
-        player_league['losses'] = league_data['losses']
+        player_league['wins'] = wins
+        player_league['losses'] = losses
         player_league['isVeteran'] = league_data['isVeteran']
         player_league['isHotStreak'] = league_data['isHotStreak']
         player_league['leaguePoints'] = league_data['leaguePoints']
