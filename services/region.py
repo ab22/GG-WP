@@ -43,3 +43,28 @@ class Region():
         elif region == 'kr':
             return 'KR'
         return ''
+
+
+    def region_name(region):
+        region = region.lower()
+        if region == 'na':
+            return 'North America'
+        elif region == 'lan':
+            return 'Latin America North'
+        elif region == 'br':
+            return 'Brazil'
+        elif region == 'las':
+            return 'Latin America South'
+        elif region == 'oce':
+            return 'Oceania'
+        elif region == 'eune':
+            return 'Europe Nordic & East'
+        elif region == 'tr':
+            return 'Turkey'
+        elif region == 'ru':
+            return 'Russia'
+        elif region == 'euw':
+            return 'Europe West'
+        elif region == 'kr':
+            return 'Korea'
+        return ''

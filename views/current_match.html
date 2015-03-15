@@ -46,7 +46,7 @@
                     <div class="row">
                         <h3>{{ team['title'] }}</h3>
                         <table class="table table-striped">
-                            <thead>
+                            <thead class="table-header">
                                 <tr>
                                     <th style="width: 5%"></th>
                                     <th style="width: 15%">Summoner</th>
@@ -59,20 +59,20 @@
                             <tbody>
                                 {% for player in team['players'] %}
                                     {% if game['requester_id'] == player['summonerId'] %}
-                                    <tr style="background-color: #FFFACD">
+                                    <tr class="requester-col">
                                     {% else %}
                                     <tr>
                                     {% end %}
                                         <td>
                                             <div class="center-block" style="float: left; width: 47px; height: 30px;">
-                                                <img width="30px" height="28px" src="/static/champions/{{ player['championImageName'] }}.png" />
+                                                <img width="30px" height="28px" src="/static/champions/{{ player['championImageName'] }}.png" title="{{ player['championName'] }}" />
                                             </div>
                                             <div class="center-block" style="float: left; ">
                                                 <div class="row" style="display: flex; align-items: center">
-                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spellImageName1'] }}.png" />
+                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spellImageName1'] }}.png" title="{{ player['spell1Name'] }}" />
                                                 </div>
                                                 <div class="row" style="display: flex; align-items: center; padding-top: 2px">
-                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spellImageName2'] }}.png" />
+                                                    <img width="13px" height="13px" src="/static/summoners/{{ player['spellImageName2'] }}.png" title="{{ player['spell2Name'] }}" />
                                                 </div>
                                             </div>
                                         </td>
@@ -111,6 +111,18 @@
                                     </tr>
                                 {% end %}
                             </tbody>
+                            <tfoot class="table-footer">
+                                <tr>
+                                    <td colspan="6">
+                                        <b>Bans: </b>
+                                        {% for ban in team['bannedChampions'] %}
+                                            <span>
+                                                <img width="30px" height="30px" src="/static/champions/{{ ban['championImageName'] }}.png" title="{{ ban['championName'] }}" />
+                                            </span>
+                                        {% end %}
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 {% end %}
