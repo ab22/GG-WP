@@ -15,6 +15,7 @@ cachedb = None
 DEFAULT_MONGODB_PORT = 27017
 DEFAULT_REDIS_PORT = 6379
 
+
 def configure_mongodb(connection):
     host = connection.get('host', None)
     port = connection.get('port', DEFAULT_MONGODB_PORT)

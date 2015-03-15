@@ -72,3 +72,13 @@ class Champion():
         for invalid_char in invalid_characters:
             cleaned_name = cleaned_name.replace(invalid_char, '')
         return cleaned_name
+
+    @staticmethod
+    @gen.coroutine
+    def update_champions():
+        code, champs = yield Champion.request_all()
+        if champs is None:
+            return code, champs
+        yield Champion.migrate(champs)
+        yield Champion.cache_all()
+        return code, champs

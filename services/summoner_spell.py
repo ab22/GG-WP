@@ -74,3 +74,13 @@ class SummonerSpell():
             cleaned_name = cleaned_name.replace(invalid_char, '')
         return 'Summoner{}'.format(cleaned_name)
 
+    @staticmethod
+    @gen.coroutine
+    def update_summoner_spells():
+        code, spells = yield SummonerSpell.request_all()
+        if spells is None:
+            return code, spells
+        yield SummonerSpell.migrate(spells)
+        yield SummonerSpell.cache_all()
+        return code, spells
+

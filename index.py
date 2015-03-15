@@ -26,7 +26,8 @@ def main():
         'static_path': settings.STATIC_PATH,
         'log': log,
         'cookie_secret': settings.SECRET_KEY,
-        'login_url': settings.LOGIN_URL
+        'login_url': settings.LOGIN_URL,
+        'db': services.db
     }
     application = tornado.web.Application(**params)
 

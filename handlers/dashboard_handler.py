@@ -7,22 +7,6 @@ from services import Champion, SummonerSpell
 
 
 class DashboardHandler(AuthHandler):
-    @gen.coroutine
-    def update_champions(self):
-        code, champs = yield Champion.request_all()
-        if champs is None:
-            return
-        yield Champion.migrate(champs)
-        yield Champion.cache_all()
-
-    @gen.coroutine
-    def update_summoner_spells(self):
-        code, spells = yield SummonerSpell.request_all()
-        if spells is None:
-            return
-        yield SummonerSpell.migrate(spells)
-        yield SummonerSpell.cache_all()
-
     @authenticated
     @gen.coroutine
     def get(self):
@@ -38,7 +22,7 @@ class DashboardHandler(AuthHandler):
             return
 
         if action == 'champions':
-            yield self.update_champions()
+            yield Champion.update_champions()
         elif action == 'summoner_spells':
             yield self.update_summoner_spells()
         self.render(template)
