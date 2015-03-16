@@ -6,9 +6,10 @@ app.config(function($interpolateProvider){
 });
 
 app.controller('IndexCtrl', function($scope){
-    $scope.selectedRegion = 'NA';
+    $scope.selectedRegion = '';
     $scope.summonerName = '';
     var regionKey = 'na';
+    var self = this;
 
     $scope.changeRegion = function(newRegion){
         $scope.selectedRegion = $scope.regions[newRegion];
@@ -21,5 +22,9 @@ app.controller('IndexCtrl', function($scope){
         }
         window.location = '/match/' + regionKey + '/' + $scope.summonerName;
     };
+
+    $scope.$watch('regions', function(){
+        $scope.selectedRegion = $scope.regions.na;
+    });
 
 });
